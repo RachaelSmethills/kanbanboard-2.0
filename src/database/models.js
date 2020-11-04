@@ -36,7 +36,7 @@ Task.init({
         autoIncrement: true
     },
     desc: DataTypes.STRING,
-    status: DataTypes.NUMBER
+    status: DataTypes.INTEGER
 
 }, { sequelize });
 
