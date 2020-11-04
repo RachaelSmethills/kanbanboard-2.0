@@ -1,0 +1,26 @@
+[{
+    "name": "Jermey",
+    "avatarUrl": "https://a1cf74336522e87f135f-2f21ace9a6cf0052456644b80fa06d4f.ssl.cf2.rackcdn.com/images/characters_opt/p-Peep-Show-Robert-Webb.jpg",
+    "projects": [{
+            "name": "Become succesfull musician",
+            "tasks": [{
+                    "desc": "learn the triangle",
+                    "status": 0
+                },
+                {
+                    "desc": "sign record deal",
+                    "status": 0
+                }
+            ]
+        },
+        {
+            "name": "Totally outragous",
+            "tasks": [{
+                "desc": "live it large",
+                "status": 1
+            }]
+        }
+    ]
+}
+
+]
