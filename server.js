@@ -26,6 +26,7 @@ app.get('/', async (req, res) => {
 })
 
 app.listen(port, () => {
+    console.log('Listening..', port);
     seeder.seedDb();
     console.log(`Example app listening at http://localhost:${port}`);
 })
