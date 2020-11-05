@@ -21,7 +21,19 @@ app.set('view engine', 'handlebars')
 
 app.get('/', async (req, res) => {
     const users = await User.findAll();
-    const projects = await Project.findAll();
+    const projects = await Project.findAll({
+        include: [{ model: Task }]
+    });
+
+    projects.forEach(project => {
+        const tasks = project.Tasks;
+        console.log('I got this many', tasks.length);
+        const { todo, doing, done } = getTasks(tasks);
+        const progressBarData = getProgressBarData(done, todo, doing);
+        project.progressBarData = progressBarData;
+    })
+
+
     res.render('index', { users, projects });
 });
 
@@ -79,15 +91,31 @@ app.get('/project/:id', async(req, res) => {
         include: [{ model: User }]
     });
 
+    const { todo, doing, done } = getTasks(tasks);
+    const progressBarData = getProgressBarData(done, todo, doing);
+    const users = await User.findAll();
+
+    //res.send({ project, tasks, users });
+    res.render('tasks', { project, todo, doing, done, users, progressBarData});
+});
+
+function getProgressBarData(done, todo, doing) {
+    const completedPercentage = ((done.length / (todo.length + doing.length + done.length)) * 100).toFixed(2);
+    const todoPercentage = ((todo.length / (todo.length + doing.length + done.length)) * 100).toFixed(2);
+    const doingPercentage = ((doing.length / (todo.length + doing.length + done.length)) * 100).toFixed(2);
+
+    const showProgressBar = completedPercentage > 0 || todoPercentage > 0 || doingPercentage > 0;
+
+    return { completedPercentage , todoPercentage, doingPercentage, showProgressBar }
+}
+
+function getTasks(tasks) {
     const todo = tasks.filter(x => x.status == 0);
     const doing = tasks.filter(x => x.status == 1);
     const done = tasks.filter(x => x.status == 2);
 
-    const users = await User.findAll();
-
-    //res.send({ project, tasks, users });
-    res.render('tasks', { project, todo, doing, done, users });
-});
+    return { todo, doing, done }
+}
 
 
 // Tasks

@@ -40,26 +40,28 @@
   </div>
 </div>
 
+{{> progressBar}}
+
 <div class="flex-grid-thirds">
-  <div class="col dragarea" data-status='0' ondrop="drop(event)" ondragover="allowDrop(event)">
+  <div class="col dragarea alert-info" data-status='0' ondrop="drop(event)" ondragover="allowDrop(event)">
       <div class="space alert alert-info" role="alert">
-        <span>To-Do</span>
+        <span class="badge badge-dark large">To-Do<span class="badge badge-secondary pull-right">{{todo.length}}</span></span>
     </div>
       {{#each todo}}
         {{> task}}
     {{/each}}
   </div>
-  <div class="col dragarea" data-status='1' ondrop="drop(event)" ondragover="allowDrop(event)">
+  <div class="col dragarea alert-warning" data-status='1' ondrop="drop(event)" ondragover="allowDrop(event)">
     <div class="alert alert-warning" role="alert">
-        Doing
+        <span class="badge badge-dark large">Doing<span class="badge badge-secondary pull-right">{{doing.length}}</span></span>
     </div>
     {{#each doing}}
         {{> task}}
     {{/each}}
   </div>
-  <div class="col dragarea" data-status='2' ondrop="drop(event)" ondragover="allowDrop(event)">
+  <div class="col dragarea alert-success" data-status='2' ondrop="drop(event)" ondragover="allowDrop(event)">
     <div class="alert alert-success" role="alert">
-        Done
+        <span class="badge badge-dark large">Done<span class="badge badge-secondary pull-right">{{done.length}}</span></span>
     </div>
     {{#each done}}
         {{> task}}
