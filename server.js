@@ -74,7 +74,7 @@ app.get('/project/:id', async(req, res) => {
 
     const tasks = await Task.findAll({
         where: {
-            projectId: req.params.id
+            ProjectId: req.params.id
         },
         include: [{ model: User }]
     });
