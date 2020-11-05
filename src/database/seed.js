@@ -38,10 +38,15 @@ class DatabaseSeeder {
             desc: 'learn guitar',
             status: 0
         });
-        
-
         musicProject.addTask(guitarTask);
         jeremy.addTask(guitarTask);
+
+        const bassTask = await Task.create({
+            desc: 'learn bass',
+            status: 0
+        });
+        musicProject.addTask(bassTask);
+        jeremy.addTask(bassTask);
 
         const jobProject = await Project.create({
             name: 'Get better job'

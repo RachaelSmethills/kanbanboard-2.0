@@ -9,6 +9,24 @@
     overflow: auto;
 }
 
+.thumbnail {
+    position: relative;
+}
+
+.space {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.caption {
+    position: absolute;
+    top: 45%;
+    left: 0;
+    width: 100%;
+    font-size: 20px;
+}
+
 .card-body {
     color: black;
     min-width: 350px;
@@ -70,8 +88,12 @@ footer {
 .flex-grid-thirds {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: start;
     flex-wrap: wrap;
+}
+
+.page {
+    margin-bottom: 200px;
 }
 
 .col {

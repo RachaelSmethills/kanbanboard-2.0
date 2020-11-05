@@ -10,10 +10,7 @@
     <div class="flex-container fixed-height">
     
         {{#each users}}
-        <div class="flex-item">
-            <img src="{{this.avatarUrl}}">
-            <div class="userName">{{this.name}}</div>
-        </div>
+         {{> userbubble user=this}}
         {{/each}}
     </div>
 </div>

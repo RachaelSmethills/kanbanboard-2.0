@@ -33,6 +33,7 @@
 </div>
 
 <script>
+    console.log('FIRE');
 Array.from(document.querySelectorAll('[contenteditable]')).forEach(function(element, index, array){
   element.addEventListener('input', function(event) {
       var projectId = event.srcElement.dataset.id;

@@ -86,6 +86,26 @@ app.get('/project/:id', async(req, res) => {
 });
 
 
+// Tasks
+
+// update a project
+app.post('/project/:id/task/add', async(req, res) => {
+    const { name, userid } = req.body;
+
+    const project = await Project.findByPk(req.params.id)
+    const user = await User.findByPk(userid);
+    const task = await Task.create({
+        desc: name,
+        status: 0
+    });
+
+    project.addTask(task);
+    user.addTask(task);
+
+    res.redirect(`/project/${req.params.id}`);
+});
+
+
 app.listen(port, () => {
     console.log('Listening..', port);
     seeder.seedDb();
