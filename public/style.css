@@ -85,6 +85,10 @@ footer {
     vertical-align: center;
 }
 
+.dragarea {
+    height: 100vh;
+}
+
 .flex-grid-thirds {
     display: flex;
     justify-content: space-between;
