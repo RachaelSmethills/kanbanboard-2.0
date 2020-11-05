@@ -115,8 +115,6 @@ app.get('/task/:id/status/:status', async(req, res) => {
     const project = await Task.findByPk(req.params.id)
     project.update({status: req.params.status})
 
-    console.log('Made it bitch');
-
     res.redirect(req.headers.referer);
 });
 
