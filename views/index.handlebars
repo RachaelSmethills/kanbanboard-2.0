@@ -1,13 +1,12 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item active" aria-current="page">Projects</li>
+    <li class="breadcrumb-item active" aria-current="page">Kanban Board</li>
   </ol>
 </nav>
 
-{{> projects}}
-{{> users}}
+<div class="container-fluid">
+    
+    {{> projects}}
+    {{> users}}
 
-<script>
-    Handlebars.registerPartial('projects');
-    Handlebars.registerPartial('users');
-</script>
+</div>

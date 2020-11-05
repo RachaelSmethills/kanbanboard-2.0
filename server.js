@@ -21,7 +21,8 @@ app.set('view engine', 'handlebars')
 
 app.get('/', async (req, res) => {
     const users = await User.findAll();
-    res.render('index', { users });
+    const projects = await Project.findAll();
+    res.render('index', { users, projects });
 });
 
 /*
@@ -35,6 +36,67 @@ app.post('/users/add', async(req, res) => {
     const user = await User.create({ name: name, avatarUrl: avatarUrl });
     console.log('I have made user:', user);
     res.redirect(`/`)
+});
+
+/*
+    PROJECT END POINTS
+*/
+
+// Get the users projects
+app.get('/projects', async(req, res) => {
+    if (req.user) {
+        console.log('Here we have: ', req.user.id);
+        const projects = await req.user.getProjects();
+        res.render('projects', { projects });
+    } else {
+        res.redirect(`/`)
+    }
+});
+
+app.get('/projects/:id', async(req, res) => {
+    if (req.params.id != null) {
+        const user = await getUser(req.params.id);
+        const projects = await user.getProjects();
+
+        res.cookie('userid', user.id);
+
+        res.render('projects', { projects });
+    }
+});
+
+// Add a project
+app.post('/project/add', async(req, res) => {
+    const { name } = req.body;
+    const project = await Project.create({ name })
+    res.redirect(`/`)
+});
+
+// Delete a project
+app.post('/project/:id/delete', async(req, res) => {
+    const project = await Project.findByPk(req.params.id)
+    project.destroy();
+    console.log('Project is bye bye');
+    res.redirect('/');
+});
+
+// update a project
+app.post('/project/:id/update', async(req, res) => {
+    const project = await Project.findByPk(req.params.id)
+    project.update({ name: req.body.name });
+});
+
+// Single project.. do we need?
+app.get('/project/:id', async(req, res) => {
+    const project = await Project.findOne({
+        where: {
+            id: req.params.id
+        },
+        include: [{ model: Task, as: 'tasks' }]
+    });
+
+    console.log('Your single project sir', { project });
+
+    res.send(project);
 });
 
 

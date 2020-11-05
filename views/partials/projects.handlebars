@@ -1,1 +1,51 @@
-projects
+<div class="flex-grid-thirds">
+    {{#each projects}}
+    <div class="card col">
+        <div class="card-body">
+            <h5 data-id="{{this.id}}" class="card-title" contenteditable="true">{{this.name}}</h5>
+            <div class="flexlayout">
+                <form method="POST" action="/project/{{this.id}}/delete">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+                <a href="/tasks/{{this.id}}">
+                    <button class="btn btn-primary">Tasks</button>
+                </a>
+            </div>
+        </div>
+        
+    </div>
+    {{/each}}
+
+    <div class="card col">
+        <div class="card-body">
+            <form method="POST" action="/project/add">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="name" placeholder="Project Name">
+                    <input type="hidden" name="userid" value="{{userid}}">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            <h5 class="card-title">{{this.name}}</h5>
+            <p class="card-text"></p>
+        </div>
+    </div>
+</div>
+
+<script>
+Array.from(document.querySelectorAll('[contenteditable]')).forEach(function(element, index, array){
+  element.addEventListener('input', function(event) {
+      var projectId = event.srcElement.dataset.id;
+      var newName = event.srcElement.innerText;
+      console.log(event.srcElement.innerText);
+      fetch('/project/'+ projectId +'/update', {
+            method: 'POST',
+            headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({name: newName})
+        });
+    
+  });
+})
+</script>
