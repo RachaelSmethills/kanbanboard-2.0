@@ -1,6 +1,21 @@
-<div class="flex-grid-thirds">
+<div class="flex-container">
+
+    <div class="card flex-item">
+        <div class="card-body">
+            <form method="POST" action="/project/add">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="name" placeholder="Project Name">
+                    <input type="hidden" name="userid" value="{{userid}}">
+                </div>
+                <button type="submit" class="btn btn-primary">Create</button>
+            </form>
+            <h5 class="card-title">{{this.name}}</h5>
+            <p class="card-text"></p>
+        </div>
+    </div>
+
     {{#each projects}}
-    <div class="card col">
+    <div class="card flex-item">
         <div class="card-body">
             <h5 data-id="{{this.id}}" class="card-title" contenteditable="true">{{this.name}}</h5>
             <div class="flexlayout">
@@ -15,20 +30,6 @@
         
     </div>
     {{/each}}
-
-    <div class="card col">
-        <div class="card-body">
-            <form method="POST" action="/project/add">
-                <div class="form-group">
-                    <input type="text" class="form-control" name="name" placeholder="Project Name">
-                    <input type="hidden" name="userid" value="{{userid}}">
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-            <h5 class="card-title">{{this.name}}</h5>
-            <p class="card-text"></p>
-        </div>
-    </div>
 </div>
 
 <script>

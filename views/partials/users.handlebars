@@ -1,13 +1,14 @@
 <div id="loginSquare">
-    <div class="flex-container">
-    <form id="userform" action="/users/add" method="POST">
-        <h3>Create User</h3>
+    <form id="usercreateform" action="/users/add" method="POST">
+        <span class="badge badge-dark large">Users<span class="badge badge-secondary pull-right">{{users.length}}</span></span>
         <div class="create">
-            <input name="name" placeholder="username" required/>
-            <input name="avatarUrl" type="url" placeholder="avatar URL" required/>
-            <button class="btn btn-primary">Create</button>
+            <input class="form-control" name="name" placeholder="username" required/>
+            <input class="form-control" name="avatarUrl" type="url" placeholder="avatar URL">
+            <button type="submit" id="submituser" class="btn btn-primary">Create</button>
         </div>
     </form>
+    <div class="flex-container fixed-height">
+    
         {{#each users}}
         <div class="flex-item">
             <img src="{{this.avatarUrl}}">

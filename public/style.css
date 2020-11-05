@@ -1,5 +1,4 @@
 
-
 .flex-container {
     padding: 0;
     margin: 0;
@@ -7,13 +6,39 @@
     flex-wrap: wrap;
     text-align: center;
     position: relative;
+    overflow: auto;
 }
 
+.card-body {
+    color: black;
+    min-width: 350px;
+}
+
+.fixed-height {
+    height: 110px;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.large {
+    font-size: 100%;
+    width: 100%;
+}
+
+#submituser {
+    width: 100%;
+}
+
+#usercreateform {
+    min-width: 240px;
+}
 
 .flex-item {
     position: relative;
-    width: 100px;
-    height: 100px;
     margin: 10px;
     color: white;
     font-weight: bold;
@@ -32,7 +57,7 @@
     position: absolute;
     color: white;
     font-size: 20px;
-    top: 50%;
+    top: 43%;
     left: 50%;
     background-color: rgba(0,0,0,0.5);
     transform: translate(-50%, -50%);
@@ -95,11 +120,6 @@ body {
     height: 100vh;
 }
 
-#userform {
-    border-right: 4px solid black;
-    padding-right: 10px;
-}
-
 .bi-plus-circle,
 button {
     cursor: pointer;
@@ -107,7 +127,8 @@ button {
 
 #loginSquare {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
     background-color: white;
     box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
     align-items: center;
