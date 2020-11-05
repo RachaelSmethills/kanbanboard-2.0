@@ -1,0 +1,8 @@
+<div data-id="{{this.id}}" data-status="{{this.status}}" draggable="true" ondragstart="drag(event)" class="card flex-item usertask">
+    <div class="card-body">
+        <h5 data-id="{{this.id}}" class="card-title" contenteditable="true">{{this.desc}}</h5>
+        <div class="pull-right">
+            {{> userbubble user=this.User}}
+        </div>
+    </div>
+</div>

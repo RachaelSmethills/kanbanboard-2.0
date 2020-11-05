@@ -41,33 +41,66 @@
 </div>
 
 <div class="flex-grid-thirds">
-  <div class="col dragarea">
+  <div class="col dragarea" data-status='0' ondrop="drop(event)" ondragover="allowDrop(event)">
       <div class="space alert alert-info" role="alert">
         <span>To-Do</span>
     </div>
-      {{#each tasks}}
-        <div class="card flex-item">
-            <div class="card-body">
-                <h5 data-id="{{this.id}}" class="card-title" contenteditable="true">{{this.desc}}</h5>
-                <div class="pull-right">
-                    {{> userbubble user=this.User}}
-                </div>
-            </div>
-        </div>
+      {{#each todo}}
+        {{> task}}
     {{/each}}
   </div>
-  <div class="col dragarea">
+  <div class="col dragarea" data-status='1' ondrop="drop(event)" ondragover="allowDrop(event)">
     <div class="alert alert-warning" role="alert">
         Doing
     </div>
-
+    {{#each doing}}
+        {{> task}}
+    {{/each}}
   </div>
-  <div class="col dragarea">
+  <div class="col dragarea" data-status='2' ondrop="drop(event)" ondragover="allowDrop(event)">
     <div class="alert alert-success" role="alert">
         Done
     </div>
-
+    {{#each done}}
+        {{> task}}
+    {{/each}}
   </div>
 </div>
 
 </div>
+
+<script>
+    function drag(event) {
+        hideTasks(event.srcElement.dataset.status);
+        console.log('Moonse', event.srcElement.dataset.id);
+        event.dataTransfer.setData("taskid", event.srcElement.dataset.id);
+    }
+
+    function allowDrop(event) {
+        event.preventDefault();
+    }
+
+    function drop(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        var taskId = event.dataTransfer.getData("taskid");
+        fetch('/task/'+ taskId +'/status/'+ event.srcElement.dataset.status);
+
+        location.reload();
+    }
+
+    function showTasks() {
+        Array.from(document.querySelectorAll('.usertask')).forEach(function(element, index, array){
+            element.style.display = "flex";
+        });
+    }
+
+    function hideTasks(status) {
+        Array.from(document.querySelectorAll('.usertask')).forEach(function(element, index, array){
+            if (element.dataset.status != status) {
+                element.style.display = "none";
+            }
+        });
+    }
+
+</script>

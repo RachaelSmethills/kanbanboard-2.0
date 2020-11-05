@@ -26,7 +26,7 @@ class DatabaseSeeder {
         });
 
         const dobby = await User.create({
-            name: 'Dobb dobb-alina',
+            name: 'Dobby',
             avatarUrl: 'https://images.immediate.co.uk/production/volatile/sites/3/2020/04/Peep_Show_S6_EP3-091f8db.jpg?quality=45&resize=620,413'
         });
 
@@ -47,6 +47,13 @@ class DatabaseSeeder {
         });
         musicProject.addTask(bassTask);
         jeremy.addTask(bassTask);
+
+        const badChoiceTask = await Task.create({
+            desc: 'fall in love with dobby',
+            status: 1
+        });
+        musicProject.addTask(badChoiceTask);
+        jeremy.addTask(badChoiceTask);
 
         const jobProject = await Project.create({
             name: 'Get better job'

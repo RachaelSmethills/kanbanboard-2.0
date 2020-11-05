@@ -79,16 +79,20 @@ app.get('/project/:id', async(req, res) => {
         include: [{ model: User }]
     });
 
+    const todo = tasks.filter(x => x.status == 0);
+    const doing = tasks.filter(x => x.status == 1);
+    const done = tasks.filter(x => x.status == 2);
+
     const users = await User.findAll();
 
     //res.send({ project, tasks, users });
-    res.render('tasks', { project, tasks, users });
+    res.render('tasks', { project, todo, doing, done, users });
 });
 
 
 // Tasks
 
-// update a project
+// add a task
 app.post('/project/:id/task/add', async(req, res) => {
     const { name, userid } = req.body;
 
@@ -103,6 +107,17 @@ app.post('/project/:id/task/add', async(req, res) => {
     user.addTask(task);
 
     res.redirect(`/project/${req.params.id}`);
+});
+
+// update a task
+app.get('/task/:id/status/:status', async(req, res) => {
+
+    const project = await Task.findByPk(req.params.id)
+    project.update({status: req.params.status})
+
+    console.log('Made it bitch');
+
+    res.redirect(req.headers.referer);
 });
 
 
