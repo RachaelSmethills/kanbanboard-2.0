@@ -18,7 +18,14 @@
     <div class="card flex-item">
         <div class="card-body">
             <h5 data-id="{{this.id}}" class="card-title" contenteditable="true">{{this.name}}</h5>
-            {{> progressBar}}
+            {{#if progressBarData.showProgressBar}}
+                {{> progressBar}}
+                <div class="smallusers">
+                    {{#each this.projectUsers}}
+                        {{> userbubble user=this}}
+                    {{/each}}
+                </div>
+           {{/if}}
             <div class="flexlayout">
                 <form method="POST" action="/project/{{this.id}}/delete">
                     <button type="submit" class="btn btn-danger">Delete</button>

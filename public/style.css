@@ -85,6 +85,23 @@ footer {
     vertical-align: center;
 }
 
+.smallusers {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    height: 70px;
+}
+
+.smallusers img {
+    width: 3rem;
+    height: 3rem;
+}
+
+.smallusers .caption {
+    display: none;
+}
+
 .dragarea {
     height: 100vh;
 }

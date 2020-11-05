@@ -16,23 +16,29 @@ app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
-app.engine('handlebars', handlebars)
-app.set('view engine', 'handlebars')
+app.engine('handlebars', handlebars);
+app.set('view engine', 'handlebars');
 
 app.get('/', async (req, res) => {
     const users = await User.findAll();
     const projects = await Project.findAll({
         include: [{ model: Task }]
-    });
+    }); 
 
-    projects.forEach(project => {
+    for(const project of projects) {
+        project.projectUsers = [];
         const tasks = project.Tasks;
-        console.log('I got this many', tasks.length);
         const { todo, doing, done } = getTasks(tasks);
         const progressBarData = getProgressBarData(done, todo, doing);
         project.progressBarData = progressBarData;
-    })
 
+        for(const task in tasks) {
+            const user = await tasks[task].getUser();
+            if (!project.projectUsers.some(z => z.id == user.id)) {
+                project.projectUsers.push(user);
+            }
+        }
+    }
 
     res.render('index', { users, projects });
 });
@@ -140,8 +146,17 @@ app.post('/project/:id/task/add', async(req, res) => {
 // update a task
 app.get('/task/:id/status/:status', async(req, res) => {
 
-    const project = await Task.findByPk(req.params.id)
-    project.update({status: req.params.status})
+    const task = await Task.findByPk(req.params.id)
+    task.update({status: req.params.status})
+
+    res.redirect(req.headers.referer);
+});
+
+// update a task
+app.post('/task/:id/delete', async(req, res) => {
+
+    const task = await Task.findByPk(req.params.id)
+    task.destroy();
 
     res.redirect(req.headers.referer);
 });

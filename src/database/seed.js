@@ -39,7 +39,7 @@ class DatabaseSeeder {
             status: 0
         });
         musicProject.addTask(guitarTask);
-        jeremy.addTask(guitarTask);
+        dobby.addTask(guitarTask);
 
         const bassTask = await Task.create({
             desc: 'learn bass',
@@ -53,7 +53,14 @@ class DatabaseSeeder {
             status: 1
         });
         musicProject.addTask(badChoiceTask);
-        jeremy.addTask(badChoiceTask);
+        mark.addTask(badChoiceTask);
+
+        const bestManagerTask = await Task.create({
+            desc: 'be the man',
+            status: 2
+        });
+        musicProject.addTask(bestManagerTask);
+        johnson.addTask(bestManagerTask);
 
         const jobProject = await Project.create({
             name: 'Get better job'

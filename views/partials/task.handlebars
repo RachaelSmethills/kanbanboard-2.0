@@ -4,5 +4,9 @@
         <div class="pull-right">
             {{> userbubble user=this.User}}
         </div>
+
+       <form method="POST" action="/task/{{this.id}}/delete">
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
     </div>
 </div>
