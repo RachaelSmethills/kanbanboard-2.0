@@ -1,5 +1,4 @@
 const {User, Project, Task, sequelize} = require('./models');
-const defaultData = require('../../defaultdata.json');
 
 class DatabaseSeeder {
     seedDb() {

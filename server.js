@@ -21,9 +21,22 @@ app.set('view engine', 'handlebars')
 
 app.get('/', async (req, res) => {
     const users = await User.findAll();
-    console.log('Found these guys', users);
     res.render('index', { users });
-})
+});
+
+/*
+    USER END POINTS
+*/
+
+// Add a User
+app.post('/users/add', async(req, res) => {
+    console.log('Details provided', req.body);
+    const { name, avatarUrl } = req.body;
+    const user = await User.create({ name: name, avatarUrl: avatarUrl });
+    console.log('I have made user:', user);
+    res.redirect(`/`)
+});
+
 
 app.listen(port, () => {
     console.log('Listening..', port);

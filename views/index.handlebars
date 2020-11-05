@@ -1,7 +1,13 @@
-Index page
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">Projects</li>
+  </ol>
+</nav>
 
-{{#each users}}
-    <div class="card col">
-       <h1>{{this.name}}</h1> 
-    </div>
-{{/each}}
+{{> projects}}
+{{> users}}
+
+<script>
+    Handlebars.registerPartial('projects');
+    Handlebars.registerPartial('users');
+</script>
